@@ -63,26 +63,28 @@ public class Stacks{
         int ctr=1;
         for(int i=0;i<infix.length();i++){
             String c =  String.valueOf(infix.charAt(i));
-            int priority = st.priorityCheck(c);
-            if(priority>0){
-                ctr++;
-            }
             if(c==")"){
-                while(st.top.priority!=4){
+                while(st.top.data!="("){ //Problem
                     postfix+=st.pop();
                     ctr--;
                 }
                 postfix+=st.pop();
                 ctr--;
             }
-            if(priority<st.top.priority){
+            int priority = st.priorityCheck(c);
+            if(priority>0){
+                ctr++;
+                System.out.println("Operator Found");
+            }
+            if(priority<st.top.priority){ //Problem
                 st.push(c, priority);
             }
             else{
-                while(priority>=st.top.priority){
-                    ctr--;
-                    if(ctr==0)break;
+                while(priority>=st.top.priority){ //Problem
                     postfix+=st.pop();
+                    ctr--;
+                    if(ctr==0)
+                    break;
                 }
                 st.push(c, priority);
             }
